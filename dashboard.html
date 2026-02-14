@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unified Cyber Resource Intelligence Dashboard</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: lavender;
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: lavender;
+        }
+
+        select, input {
+            padding: 10px;
+            margin: 10px;
+            width: 50%;
+        }
+
+        button {
+            background-color: lavender;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .box {
+            border: 1px solid lavender;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        hr {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<h1>Unified Cyber Resource Intelligence Platform</h1>
+
+<hr>
+
+<!-- ================= COMPLAINT STEP ASSISTANT ================= -->
+
+<h2>Step-by-Step Complaint Assistant</h2>
+
+<select id="crimeType">
+    <option value="">Select Crime Type</option>
+    <option value="Online Scam">Online Scam</option>
+    <option value="UPI Fraud">UPI Fraud</option>
+    <option value="Cyberbullying">Cyberbullying</option>
+</select>
+
+<button onclick="getSteps()">Get Complaint Steps</button>
+
+<div class="box">
+    <p id="portal"></p>
+    <p id="helpline"></p>
+    <p id="steps"></p>
+</div>
+
+<hr>
+
+<!-- ================= AI CHATBOT ================= -->
+
+<h2>AI Cyber Assistant</h2>
+
+<label>Select Region:</label>
+<select id="region">
+    <option value="">Select Region</option>
+    <option value="India">India</option>
+    <option value="United States">United States</option>
+    <option value="Finland">Finland</option>
+    <option value="Other">Other</option>
+</select>
+
+<br>
+
+<input type="text" id="userInput" placeholder="Describe your cyber issue">
+
+<br>
+
+<button onclick="sendMessage()">Ask AI</button>
+
+<div class="box">
+    <p id="chatOutput">AI response will appear here...</p>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+function getSteps() {
+
+    let crime = document.getElementById("crimeType").value;
+
+    if(crime === "") {
+        alert("Please select a crime type");
+        return;
+    }
+
+    fetch("/get_steps", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({crime: crime})
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("portal").innerText = "Portal: " + data.portal;
+        document.getElementById("helpline").innerText = "Helpline: " + data.helpline;
+        document.getElementById("steps").innerText = "Steps: " + data.steps.join(", ");
+    })
+    .catch(error => {
+        alert("Error fetching complaint steps");
+    });
+}
+
+
+
+function sendMessage() {
+
+    let message = document.getElementById("userInput").value;
+    let region = document.getElementById("region").value;
+
+    if(region === "") {
+        alert("Please select region");
+        return;
+    }
+
+    if(message.trim() === "") {
+        alert("Enter your cyber problem");
+        return;
+    }
+
+    fetch("/ask", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: message,
+            region: region
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("chatOutput").innerText = data.reply;
+    })
+    .catch(error => {
+        document.getElementById("chatOutput").innerText = "Server error";
+    });
+}
+
+</script>
+
+</body>
+</html>

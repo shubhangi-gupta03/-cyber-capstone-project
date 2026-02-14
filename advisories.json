@@ -1,0 +1,9 @@
+{
+  "US":[
+    {"title":"Ransomware Alert","type":"CERT","time":"Latest"},
+    {"title":"Phishing Awareness","type":"Education","time":"Latest"}
+  ],
+  "FI":[
+    {"title":"Bank Scam Warning","type":"Government","time":"Latest"}
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "US": [
+    {
+      "crime":"Financial Fraud",
+      "portal":"Federal Fraud Portal",
+      "steps":[
+        "Collect bank proof",
+        "File online complaint",
+        "Contact bank fraud unit"
+      ]
+    },
+    {
+      "crime":"Identity Theft",
+      "portal":"Identity Protection Portal",
+      "steps":[
+        "Secure accounts",
+        "File identity report",
+        "Monitor credit"
+      ]
+    }
+  ],
+
+  "FI": [
+    {
+      "crime":"Online Scam",
+      "portal":"Finnish Police Cyber Portal",
+      "steps":[
+        "Collect evidence",
+        "Submit complaint",
+        "Follow police guidance"
+      ]
+    }
+  ]
+}

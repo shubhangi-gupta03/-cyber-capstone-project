@@ -1,0 +1,9 @@
+{
+  "US": [
+    {"type":"Cyber Crime","contact":"Federal Reporting Portal","availability":"24x7"},
+    {"type":"Identity Theft","contact":"Consumer Protection","availability":"24x7"}
+  ],
+  "FI": [
+    {"type":"Cyber Incident","contact":"National Police","availability":"24x7"}
+  ]
+}
